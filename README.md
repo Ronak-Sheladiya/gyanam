@@ -1,77 +1,75 @@
-Of course. Here are the requirements and commands to run your PDF Q&A application from scratch.
+📄 PDF Q&A with Local LLMs
+This is a simple web application built with Streamlit and LangChain that allows you to chat with your PDF documents. It uses local models via Ollama, ensuring your data remains private and secure on your machine.
 
-Prerequisites
-Before you begin, ensure you have the following installed on your system:
+Features
+Multiple PDF Uploads: Process and query one or more PDF documents simultaneously.
 
-Python: Version 3.8 or newer.
+Local & Private: All processing happens locally using Ollama. No data is sent to external APIs.
 
-Ollama: You must have the Ollama application installed and running locally. You can download it from ollama.com.
+Source Referencing: The app shows which parts of the documents were used to generate the answer.
 
-Step 1: Set Up Your Project
-First, organize your files.
+Simple UI: Easy-to-use interface for uploading files and asking questions.
 
-Create a new folder for your project and navigate into it:
+⚙️ Setup and Installation Guide
+Follow these steps to get the application running on your local machine.
 
-Bash
+1. Prerequisites
+Make sure you have the following software installed:
 
-mkdir pdf_qa_app
-cd pdf_qa_app
-Create a file named app.py and paste your Python code into it.
+Python 3.8+
 
-Create a file named requirements.txt in the same folder and add the following lines to it. This file lists all the necessary Python libraries.
+Ollama: Download and install from the official Ollama website.
 
-Plaintext
+2. Clone the Repository
+First, get the project files on your local machine. If you are using git, you can clone the repository:
 
-streamlit
-langchain
-langchain-community
-langchain-ollama
-faiss-cpu
-pypdf
-Your project folder should now look like this:
+git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+cd your-repo-name
 
-pdf_qa_app/
-├── app.py
-└── requirements.txt
-Step 2: Install Python Packages
-It's best practice to use a virtual environment to manage project dependencies.
+Otherwise, just create a folder and place app.py and requirements.txt inside it.
 
-Create and activate a virtual environment:
+3. Install Dependencies
+It is highly recommended to use a Python virtual environment to avoid conflicts with other projects.
 
-On macOS/Linux:
+Create and activate the environment:
 
-Bash
+On macOS / Linux:
 
 python3 -m venv venv
 source venv/bin/activate
-On Windows:
 
-Bash
+On Windows:
 
 python -m venv venv
 .\venv\Scripts\activate
-Install the required libraries using the requirements.txt file:
 
-Bash
+Install the required packages from requirements.txt:
 
 pip install -r requirements.txt
-Step 3: Download Ollama Models
-Your code requires two specific models from Ollama. Open your terminal and run the following commands to download them. Make sure the Ollama application is running before you do this.
 
-Download the embedding model:
+4. Download Ollama Models
+This application requires two specific models from Ollama. Ensure the Ollama desktop application is running before proceeding.
 
-Bash
+Open your terminal and pull the necessary models:
 
+# Pull the embedding model for creating vector representations
 ollama pull nomic-embed-text
-Download the LLM:
 
-Bash
-
+# Pull the language model for generating answers
 ollama pull gemma:2b
-Step 4: Run the Streamlit App
-Now you're ready to launch the application. Run the following command in your terminal from the project directory (pdf_qa_app).
 
-Bash
+▶️ How to Run the Application
+Once the setup is complete, you can launch the application with a single command from your project directory:
 
 streamlit run app.py
-This command will start the Streamlit server, and your PDF Q&A application should open automatically in a new web browser tab. You can now upload your PDF files and start asking questions. 🚀
+
+This will start the local server and open the application in a new tab in your default web browser. You can now upload your PDFs and start asking questions! 🚀
+
+🛠️ Configuration
+You can easily change the models or the text processing parameters by editing the CONFIG section at the top of the app.py file:
+
+# ---------- CONFIG ----------
+EMBED_MODEL = "nomic-embed-text"
+LLM_MODEL = "gemma:2b"      # small + fast
+CHUNK_SIZE = 800
+CHUNK_OVERLAP = 100
